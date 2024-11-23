@@ -14,5 +14,8 @@
     "vue": "latest",
     "vue-router": "latest"
   },
-  "packageManager": "pnpm@8.6.3+sha1.30b2ad9776a393ccd1766239fd21e0c14a3c3acf"
+  "packageManager": "pnpm@8.6.3+sha1.30b2ad9776a393ccd1766239fd21e0c14a3c3acf",
+  "devDependencies": {
+    "cypress": "^13.16.0"
+  }
 }
