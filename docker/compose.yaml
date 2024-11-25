@@ -1,0 +1,11 @@
+services:
+  node:
+    build:
+      context: ../
+      dockerfile: docker/front/Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ../:/app
+    restart: unless-stopped
+    tty: true
