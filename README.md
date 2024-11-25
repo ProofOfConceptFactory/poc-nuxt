@@ -1,75 +1,78 @@
-# Nuxt Minimal Starter
+Hello from Nuxt!👋
+========================
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+The "Hello from Nuxt!👋" application is just a starter to show a minimalist Nuxt app.
 
-## Setup
+Requirements
+------------
 
-Make sure to install dependencies:
+* [Docker Desktop][1]
 
-```bash
-# npm
-npm install
+Installation
+------------
 
-# pnpm
-pnpm install
+Clone this repository:
 
-# yarn
-yarn install
-
-# bun
-bun install
+```console
+https://github.com/abdounikarim/poc-nuxt
 ```
 
-## Development Server
+Go on the project root folder:
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+```console
+cd poc-nuxt/
 ```
 
-## Production
+Execute this command to launch docker container in dev:
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+```console
+docker compose -f docker/compose.yaml up -d --build
 ```
 
-Locally preview production build:
+Install JavaScript dependencies:
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+```console
+docker compose -f docker/compose.yaml exec node pnpm install
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Usage
+-----
+
+There's no need to configure anything before running the application. There are
+2 different ways of running this application depending on your needs:
+
+**Option 1. Run the application in dev mode**
+
+Start the application using the nuxt server:
+
+```console
+docker compose -f docker/compose.yaml exec node pnpm run dev
+```
+
+Then access the application in your browser at the given URL (<http://localhost:8000> by default).
+
+**Option 2. Run the application in prod mode**
+
+```console
+docker compose -f docker/compose.yaml exec node pnpm run build
+```
+You now have your fresh JavaScript files for production 🚀.
+You can check everything is OK by opening the [http://localhost:8000/dist/index.html][2] link and navigate on your application.
+
+Tests
+-----
+
+Install Cypress dependencies:
+
+```console
+docker compose -f docker/compose.yaml exec node pnpm cypress install
+```
+
+Execute this command to run tests:
+
+```console
+docker compose -f docker/compose.yaml exec node pnpm cypress run
+```
+
+[1]: https://www.docker.com/products/docker-desktop/
+[2]: http://localhost:8000/dist/index.html
