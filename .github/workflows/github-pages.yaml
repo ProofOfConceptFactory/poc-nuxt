@@ -6,7 +6,39 @@ on:
     branches:
       - main
 jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+          run_install: false
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Install mkcert latest version and generate certificates
+        run: |
+          LATEST_VERSION=$(curl -s https://api.github.com/repos/FiloSottile/mkcert/releases/latest | jq -r '.tag_name')
+          curl -L -o mkcert "https://github.com/FiloSottile/mkcert/releases/download/${LATEST_VERSION}/mkcert-${LATEST_VERSION}-linux-amd64" -o mkcert
+          chmod +x mkcert
+          ./mkcert -install
+          mkdir -p certs
+          ./mkcert -key-file certs/poc-nuxt.key.pem -cert-file certs/poc-nuxt.crt.pem localhost
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run dev server in background
+        run: pnpm dev &
+      - name: Install Cypress
+        run: pnpm cypress install
+      - name: Run tests
+        run: pnpm cypress run
+
   build:
+    needs: tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,9 +46,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: 'pnpm'
       # Pick your own package manager and build script
-      - run: npm install
-      - run: NUXT_APP_BASE_URL=/poc-nuxt/ npx nuxt build --preset github_pages
+      - run: pnpm install
+      - run: NUXT_APP_BASE_URL=/poc-nuxt/ pnpm build --preset github_pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
