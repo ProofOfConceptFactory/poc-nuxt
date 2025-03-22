@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run dev server in background
-        run: pnpm dev &
+        run: pnpm dev --https --ssl-cert certs/poc-nuxt.crt.pem --ssl-key certs/poc-nuxt.key.pem &
       - name: Install Cypress
         run: pnpm cypress install
       - name: Run tests
