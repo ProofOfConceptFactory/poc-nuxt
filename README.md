@@ -1,7 +1,7 @@
 Hello from Nuxt!👋
 ========================
 
-[![Deploy to GitHub Pages](https://github.com/abdounikarim/poc-nuxt/actions/workflows/github-pages.yaml/badge.svg)](https://github.com/abdounikarim/poc-nuxt/actions/workflows/github-pages.yaml)
+[![Deploy to GitHub Pages](https://github.com/ProofOfConceptFactory/poc-nuxt/actions/workflows/github-pages.yaml/badge.svg)](https://github.com/ProofOfConceptFactory/poc-nuxt/actions/workflows/github-pages.yaml)
 
 The "Hello from Nuxt!👋" application is just a starter to show a minimalist Nuxt app.
 
@@ -17,7 +17,7 @@ Installation
 Clone this repository:
 
 ```console
-https://github.com/abdounikarim/poc-nuxt
+https://github.com/ProofOfConceptFactory/poc-nuxt
 ```
 
 Go on the project root folder:
