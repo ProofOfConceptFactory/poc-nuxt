@@ -1,10 +1,12 @@
 # https://github.com/actions/deploy-pages#usage
 name: Deploy to GitHub Pages
 on:
-  workflow_dispatch:
+  # Runs on pushes targeting the default branch
   push:
-    branches:
-      - main
+    branches: [ main ]
+  # Runs on pull requests based on the default branch
+  pull_request:
+    branches: [ main ]
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -18,7 +20,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: latest
           cache: 'pnpm'
       - name: Install mkcert latest version and generate certificates
         run: |
@@ -38,6 +40,8 @@ jobs:
         run: pnpm cypress run
 
   build:
+    # Only run deployment on main branch pushes or manual workflow dispatch
+    if: github.ref_name == 'main'
     needs: tests
     runs-on: ubuntu-latest
     steps:
@@ -49,7 +53,7 @@ jobs:
           run_install: false
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: latest
           cache: 'pnpm'
       # Pick your own package manager and build script
       - run: pnpm install
