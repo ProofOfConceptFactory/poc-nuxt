@@ -59,7 +59,7 @@ jobs:
       - run: pnpm install
       - run: NUXT_APP_BASE_URL=/poc-nuxt/ pnpm build --preset github_pages
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./.output/public
   # Deployment job
